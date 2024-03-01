@@ -1,3 +1,4 @@
+import csv
 from typing import List, Dict
 
 
@@ -5,8 +6,13 @@ class ProcessJobs:
     def __init__(self) -> None:
         self.jobs_list = list()
 
-    def read(self) -> List[Dict]:
-        pass
+    def read(self, path) -> List[Dict]:
+        with open(path, 'r', encoding="utf-8") as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                self.jobs_list.append(dict(row))
+
+        return self.jobs_list
 
     def get_unique_job_types(self) -> List[str]:
         pass
